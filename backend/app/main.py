@@ -2,25 +2,19 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.database.database import Base, engine
+import app.models  # load semua model
 
-# Import models supaya SQLAlchemy membuat tabel
-from app.models.product import Product
-from app.models.chapter import Chapter
-from app.models.block import Block
-
-# Import routers
 from app.api.routes.product import router as product_router
 from app.api.routes.chapter import router as chapter_router
 from app.api.routes.block import router as block_router
 from app.api.routes.dashboard import router as dashboard_router
 
-# Aplikasi FastAPI
 app = FastAPI(
     title="DBVerse API",
     version="1.0.0",
 )
 
-# Middleware CORS
+# CORS
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
@@ -31,10 +25,12 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# All tabel
-Base.metadata.create_all(bind=engine)
+# CREATE TABLES hanya sekali saat startup
+@app.on_event("startup")
+def on_startup():
+    Base.metadata.create_all(bind=engine)
 
-# Register routers
+# Routers
 app.include_router(product_router)
 app.include_router(chapter_router)
 app.include_router(block_router)
