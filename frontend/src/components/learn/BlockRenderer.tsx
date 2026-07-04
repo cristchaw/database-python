@@ -86,11 +86,7 @@ export default function BlockRenderer({
       );
 
     case "diagram":
-      return (
-        <ArchitectureDiagram
-          type={data.type}
-        />
-      );
+      return <ArchitectureDiagram />;
 
     case "table":
       return (
@@ -175,11 +171,7 @@ export default function BlockRenderer({
       );
 
     case "sql_cheatsheet":
-      return (
-        <SQLCheatSheet
-          queries={data.queries}
-        />
-      );
+      return <SQLCheatSheet />;
 
     case "timeline":
       return (
