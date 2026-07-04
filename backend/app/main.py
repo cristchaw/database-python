@@ -36,8 +36,7 @@ app.add_middleware(
     allow_origins=[
         "http://localhost:3000",
         "http://127.0.0.1:3000",
-        # Tambahkan domain frontend nanti
-        # "https://your-frontend.vercel.app",
+        "https://database-python.vercel.app",
     ],
     allow_credentials=True,
     allow_methods=["*"],
