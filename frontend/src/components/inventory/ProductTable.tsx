@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import ProductForm from "./ProductForm";
+import API_URL from "@/services/api";
 import { Product } from "@/types/product";
 import toast from "react-hot-toast";
 
@@ -17,11 +18,9 @@ export default function ProductTable() {
 
     async function loadProducts() {
     const url =
-        search.trim() === ""
-        ? "http://127.0.0.1:8000/products/"
-        : `http://127.0.0.1:8000/products/?search=${encodeURIComponent(
-            search
-            )}`;
+    search.trim() === ""
+    ? `${API_URL}/products/`
+    : `${API_URL}/products/?search=${encodeURIComponent(search)}`;
 
     const res = await fetch(url);
 
@@ -59,7 +58,7 @@ export default function ProductTable() {
 
     try {
       const res = await fetch(
-        `http://127.0.0.1:8000/products/${id}`,
+        `${API_URL}/products/${id}`,
         {
           method: "DELETE",
         }

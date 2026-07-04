@@ -10,7 +10,8 @@ DATABASE_URL = os.getenv("DATABASE_URL")
 
 engine = create_engine(
     DATABASE_URL,
-    poolclass=NullPool
+    poolclass=NullPool, 
+    echo=True,
 )
 
 SessionLocal = sessionmaker(

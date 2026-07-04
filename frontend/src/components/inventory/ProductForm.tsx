@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 
+import API_URL from "@/services/api";
 import { Product } from "@/types/product";
 
 import toast from "react-hot-toast";
@@ -49,7 +50,7 @@ export default function ProductForm({
 
       if (product) {
         res = await fetch(
-          `http://127.0.0.1:8000/products/${product.id}`,
+          `${API_URL}/products/${product.id}`,
           {
             method: "PUT",
             headers: {
@@ -60,7 +61,7 @@ export default function ProductForm({
         );
       } else {
         res = await fetch(
-          "http://127.0.0.1:8000/products/",
+          `${API_URL}/products/`,
           {
             method: "POST",
             headers: {

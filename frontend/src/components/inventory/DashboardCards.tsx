@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import API_URL from "@/services/api";
 
 interface DashboardData {
   total_products: number;
@@ -15,7 +16,7 @@ export default function DashboardCards() {
   useEffect(() => {
     async function loadDashboard() {
       const res = await fetch(
-        "http://127.0.0.1:8000/dashboard/"
+        `${API_URL}/dashboard/`
       );
 
       const data = await res.json();
@@ -45,9 +46,7 @@ export default function DashboardCards() {
       <Card
         title="Inventory Value"
         icon="💰"
-        value={`Rp ${dashboard.inventory_value.toLocaleString(
-          "id-ID"
-        )}`}
+        value={`Rp ${dashboard.inventory_value.toLocaleString("id-ID")}`}
       />
     </div>
   );
@@ -59,17 +58,11 @@ interface CardProps {
   icon: string;
 }
 
-function Card({
-  title,
-  value,
-  icon,
-}: CardProps) {
+function Card({ title, value, icon }: CardProps) {
   return (
     <div className="flex min-h-[150px] flex-col justify-between rounded-2xl border border-zinc-800 bg-zinc-900 p-6">
       <div className="mb-4 flex items-center justify-between">
-        <span className="text-3xl">
-          {icon}
-        </span>
+        <span className="text-3xl">{icon}</span>
 
         <span className="text-sm text-zinc-500">
           {title}
